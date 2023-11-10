@@ -1,9 +1,7 @@
 package com.example.application;
 
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -15,26 +13,16 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import org.checkerframework.checker.nullness.qual.NonNull;
-
-import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
 public class History extends AppCompatActivity {
 
-
     private List<SavedResult> savedResultsList = new ArrayList<>();
     private boolean isRecommendationClickable = true;
     private Button recommendationButton;
-    Button cal, his;
+    Button clearResultsButton;
+    TextView savedResultsCountTextView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,13 +34,16 @@ public class History extends AppCompatActivity {
             getSupportActionBar().hide();
         }
 
-
+        savedResultsCountTextView = findViewById(R.id.savedResultsCount);
 
         recommendationButton = findViewById(R.id.recommendationButton);
-        Button clearResultsButton = findViewById(R.id.clearResultsButton);
+        clearResultsButton = findViewById(R.id.clearResultsButton);
 
         // Retrieve saved results from SavedResultsManager
         List<SavedResult> savedResults = SavedResultsManager.getSavedResultsList();
+
+        // Update the saved results count TextView
+        updateSavedResultsCount(savedResults.size());
 
         // Initialize RecyclerView and set adapter
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
@@ -103,6 +94,9 @@ public class History extends AppCompatActivity {
 
                         recommendationButton.setVisibility(View.GONE);
                         isRecommendationClickable = true;
+
+                        // Update the saved results count TextView to 0
+                        updateSavedResultsCount(0);
                     }
                 });
                 builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
@@ -116,8 +110,6 @@ public class History extends AppCompatActivity {
             }
         });
 
-
-
         ImageButton backButton = findViewById(R.id.backButton);
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +117,10 @@ public class History extends AppCompatActivity {
                 onBackPressed();
             }
         });
+    }
+
+    private void updateSavedResultsCount(int count) {
+        savedResultsCountTextView.setText("Saved Results: " + count);
     }
 
     @Override

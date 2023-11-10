@@ -1,8 +1,11 @@
 package com.example.application;
 import android.annotation.SuppressLint;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.net.ConnectivityManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +16,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
@@ -27,7 +31,7 @@ public class Result_Activity extends AppCompatActivity {
 
     Button backr, saveButton;
     private boolean isSaving = false;
-
+    private boolean isConnected; // Add this variable
     @SuppressLint({"WrongViewCast", "MissingInflatedId"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +42,8 @@ public class Result_Activity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
+
+
 
         TextView resultTextView = findViewById(R.id.resultTextView);
         backr = findViewById(R.id.capagain);
@@ -66,71 +72,104 @@ public class Result_Activity extends AppCompatActivity {
             }
         });
 
+        // ...
+
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (!isSaving) {
                     isSaving = true;
 
-                    // Retrieve the disease name from the Intent
-                    String result = getIntent().getStringExtra("result");
+                    // Check internet connection
+                    if (isConnectedToInternet()) {
+                        // The device is connected to the internet, proceed with saving
 
-                    // Retrieve the byte array from the intent
-                    byte[] byteArray = getIntent().getByteArrayExtra("image");
+                        // Retrieve the disease name from the Intent
+                        String result = getIntent().getStringExtra("result");
 
-                    // Convert the byte array back to a Bitmap
-                    BitmapFactory.Options options = new BitmapFactory.Options();
-                    options.inSampleSize = 1;
-                    options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+                        // Retrieve the byte array from the intent
+                        byte[] byteArray = getIntent().getByteArrayExtra("image");
 
-                    Bitmap imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length, options);
+                        // Convert the byte array back to a Bitmap
+                        BitmapFactory.Options options = new BitmapFactory.Options();
+                        options.inSampleSize = 1;
+                        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 
-                    // Resize the Bitmap
-                    int targetWidth = 800;
-                    int targetHeight = 600;
-                    imageBitmap = Bitmap.createScaledBitmap(imageBitmap, targetWidth, targetHeight, false);
+                        Bitmap imageBitmap = BitmapFactory.decodeByteArray(byteArray, 0, byteArray.length, options);
 
-                    // Set the text for disease and severity
-                    resultTextView.setText(result);
+                        // Resize the Bitmap
+                        int targetWidth = 800;
+                        int targetHeight = 600;
+                        imageBitmap = Bitmap.createScaledBitmap(imageBitmap, targetWidth, targetHeight, false);
 
-                    // Set the image in the ImageView
-                    imageView.setImageBitmap(imageBitmap);
+                        // Set the text for disease and severity
+                        resultTextView.setText(result);
 
-                    // Create a SavedResult object
-                    SavedResult savedResult = new SavedResult(result, imageBitmap);
+                        // Set the image in the ImageView
+                        imageView.setImageBitmap(imageBitmap);
 
-                    // Redirect to another activity (Folders)
-                    Intent intent = new Intent(Result_Activity.this, Folders.class);
-                    startActivity(intent);
+                        // Create a SavedResult object
+                        SavedResult savedResult = new SavedResult(result, imageBitmap);
 
-                    // Check if `History` is full and add to the appropriate history list
-                    if (SavedResultsManager.getSavedResultsCount() < 10) {
-                        SavedResultsManager.addSavedResult(savedResult);
-                    } else if (SavedResultsManager.getSavedResultsCountHistory2() < 10) {
-                        SavedResultsManager.addSavedResultToHistory2(savedResult);
-                    } else if (SavedResultsManager.getSavedResultsCountHistory3() < 10) {
-                        SavedResultsManager.addSavedResultToHistory3(savedResult);
-                    } else if (SavedResultsManager.getSavedResultsCountHistory4() < 10) {
-                        SavedResultsManager.addSavedResultToHistory4(savedResult);
-                    } else if (SavedResultsManager.getSavedResultsCountHistory5() < 10) {
-                        SavedResultsManager.addSavedResultToHistory5(savedResult);
-                    } else if (SavedResultsManager.getSavedResultsCountHistory6() < 10) {
-                        SavedResultsManager.addSavedResultToHistory6(savedResult);
-                    } else if (SavedResultsManager.getSavedResultsCountHistory7() < 10) {
-                        SavedResultsManager.addSavedResultToHistory7(savedResult);
-                    } else if (SavedResultsManager.getSavedResultsCountHistory8() < 10) {
-                        SavedResultsManager.addSavedResultToHistory8(savedResult);
-                    } else if (SavedResultsManager.getSavedResultsCountHistory9() < 10) {
-                        SavedResultsManager.addSavedResultToHistory9(savedResult);
-                    } else if (SavedResultsManager.getSavedResultsCountHistory10() < 10) {
-                        SavedResultsManager.addSavedResultToHistory10(savedResult);
+                        // Redirect to another activity (Folders)
+                        Intent intent = new Intent(Result_Activity.this, Folders.class);
+                        startActivity(intent);
+
+                        // Check if `History` is full and add to the appropriate history list
+                        if (SavedResultsManager.getSavedResultsCount() < 10) {
+                            SavedResultsManager.addSavedResult(savedResult);
+                        } else if (SavedResultsManager.getSavedResultsCountHistory2() < 10) {
+                            SavedResultsManager.addSavedResultToHistory2(savedResult);
+                        } else if (SavedResultsManager.getSavedResultsCountHistory3() < 10) {
+                            SavedResultsManager.addSavedResultToHistory3(savedResult);
+                        } else if (SavedResultsManager.getSavedResultsCountHistory4() < 10) {
+                            SavedResultsManager.addSavedResultToHistory4(savedResult);
+                        } else if (SavedResultsManager.getSavedResultsCountHistory5() < 10) {
+                            SavedResultsManager.addSavedResultToHistory5(savedResult);
+                        } else if (SavedResultsManager.getSavedResultsCountHistory6() < 10) {
+                            SavedResultsManager.addSavedResultToHistory6(savedResult);
+                        } else if (SavedResultsManager.getSavedResultsCountHistory7() < 10) {
+                            SavedResultsManager.addSavedResultToHistory7(savedResult);
+                        } else if (SavedResultsManager.getSavedResultsCountHistory8() < 10) {
+                            SavedResultsManager.addSavedResultToHistory8(savedResult);
+                        } else if (SavedResultsManager.getSavedResultsCountHistory9() < 10) {
+                            SavedResultsManager.addSavedResultToHistory9(savedResult);
+                        } else if (SavedResultsManager.getSavedResultsCountHistory10() < 10) {
+                            SavedResultsManager.addSavedResultToHistory10(savedResult);
+                        }
+
+                        // Save the image to Firebase Storage
+                        saveImageToFirebaseStorage(savedResult, imageBitmap);
+                    } else {
+                        // The device is not connected to the internet, show an alert dialog
+                        showNoInternetDialog();
+                        isSaving = false;
                     }
-
-                    // Save the image to Firebase Storage
-                    saveImageToFirebaseStorage(savedResult, imageBitmap);
                 }
             }
+
+            private boolean isConnectedToInternet() {
+                // Check internet connection
+                ConnectivityManager connectivityManager = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+                return connectivityManager.getActiveNetworkInfo() != null
+                        && connectivityManager.getActiveNetworkInfo().isConnected();
+            }
+
+            private void showNoInternetDialog() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Result_Activity.this);
+                builder.setTitle("No Internet Connection");
+                builder.setMessage("Please check your internet connection and try again.");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
+            }
         });
+
+
 
         // Add back button functionality
         ImageButton backButton = findViewById(R.id.backButton);
