@@ -75,6 +75,9 @@ dependencies {
     implementation ("com.google.firebase:firebase-storage:19.1.1")
 
     implementation ("com.github.bumptech.glide:glide:4.16.0")
+    testImplementation("junit:junit:4.12")
+    testImplementation("junit:junit:4.12")
+    testImplementation("org.junit.jupiter:junit-jupiter:5.8.1")
 
 
 }

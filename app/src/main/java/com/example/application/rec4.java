@@ -17,7 +17,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 import java.util.Map;
 
-public class rec2 extends AppCompatActivity {
+public class rec4 extends AppCompatActivity {
 
     private Map<String, Map<Integer, String>> recommendationsMap = new HashMap<>();
     private RatingBar ratingBar;
@@ -26,7 +26,7 @@ public class rec2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rec2);
+        setContentView(R.layout.activity_rec4);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -49,7 +49,7 @@ public class rec2 extends AppCompatActivity {
             severityTextView.setText("Severity: " + severityLevel);
             recommendationTextView.setText(recommendation);
 
-            Bitmap mostFrequentImage = SavedResultsManager.getImageForMostFrequentDiseaseHistory2();
+            Bitmap mostFrequentImage = SavedResultsManager.getImageForMostFrequentDiseaseHistory4();
             if (mostFrequentImage != null) {
                 mostFrequentImageView.setImageBitmap(mostFrequentImage);
             }
@@ -72,9 +72,9 @@ public class rec2 extends AppCompatActivity {
         });
 
         TextView mostFrequentTextView = findViewById(R.id.mostFrequentTextView);
-        String mostFrequentHistory2Disease = SavedResultsManager.getMostFrequentDiseaseHistory2();
-        if (mostFrequentHistory2Disease != null) {
-            mostFrequentTextView.setText("Most Frequent Disease in History2: " + mostFrequentHistory2Disease);
+        String mostFrequentHistory4Disease = SavedResultsManager.getMostFrequentDiseaseHistory4();
+        if (mostFrequentHistory4Disease != null) {
+            mostFrequentTextView.setText("Most Frequent Disease in History4: " + mostFrequentHistory4Disease);
         }
     }
 

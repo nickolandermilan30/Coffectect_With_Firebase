@@ -7,16 +7,7 @@
     android:background="@drawable/img_3"
     tools:context=".History2">
 
-    <TextView
-        android:id="@+id/Des"
-        android:layout_width="184dp"
-        android:layout_height="35dp"
-        android:text="Des"
-        android:textSize="30sp"
-        app:layout_constraintBottom_toTopOf="@+id/recyclerView"
-        app:layout_constraintEnd_toStartOf="@+id/clearResultsButton"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/savedResultsCount" />
+
 
     <TextView
         android:id="@+id/savedResultsCount"

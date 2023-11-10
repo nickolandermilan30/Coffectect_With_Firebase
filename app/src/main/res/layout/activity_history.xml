@@ -54,8 +54,8 @@
 
     <Button
         android:id="@+id/recommendationButton"
-        android:layout_width="349dp"
-        android:layout_height="71dp"
+        android:layout_width="160dp"
+        android:layout_height="62dp"
         android:backgroundTint="@color/green"
         android:fontFamily="@font/baloo_bhai_2"
         android:text="See Result"

@@ -1,5 +1,7 @@
 package com.example.application;
 
+import static com.example.application.SavedResultsManager.getHistory8List;
+
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -15,9 +17,10 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
-public class rec2 extends AppCompatActivity {
+public class rec8 extends AppCompatActivity {
 
     private Map<String, Map<Integer, String>> recommendationsMap = new HashMap<>();
     private RatingBar ratingBar;
@@ -26,7 +29,7 @@ public class rec2 extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_rec2);
+        setContentView(R.layout.activity_rec8);
 
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
@@ -49,7 +52,7 @@ public class rec2 extends AppCompatActivity {
             severityTextView.setText("Severity: " + severityLevel);
             recommendationTextView.setText(recommendation);
 
-            Bitmap mostFrequentImage = SavedResultsManager.getImageForMostFrequentDiseaseHistory2();
+            Bitmap mostFrequentImage = SavedResultsManager.getImageForMostFrequentDiseaseHistory8();
             if (mostFrequentImage != null) {
                 mostFrequentImageView.setImageBitmap(mostFrequentImage);
             }
@@ -72,9 +75,9 @@ public class rec2 extends AppCompatActivity {
         });
 
         TextView mostFrequentTextView = findViewById(R.id.mostFrequentTextView);
-        String mostFrequentHistory2Disease = SavedResultsManager.getMostFrequentDiseaseHistory2();
-        if (mostFrequentHistory2Disease != null) {
-            mostFrequentTextView.setText("Most Frequent Disease in History2: " + mostFrequentHistory2Disease);
+        String mostFrequentHistory8Disease = SavedResultsManager.getMostFrequentDiseaseHistory8();
+        if (mostFrequentHistory8Disease != null) {
+            mostFrequentTextView.setText("Most Frequent Disease in History8: " + mostFrequentHistory8Disease);
         }
     }
 
@@ -104,5 +107,62 @@ public class rec2 extends AppCompatActivity {
             }
         }
         return "No Recommendation Available";
+    }
+
+    public static Bitmap getImageForMostFrequentDiseaseHistory8() {
+        List<SavedResult> history8List = getHistory8List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history8List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        SavedResult mostFrequentResult = null;
+
+        for (SavedResult result : history8List) {
+            if (result.getDiseaseName().equals(mostFrequentDisease)) {
+                mostFrequentResult = result;
+                break;
+            }
+        }
+
+        if (mostFrequentResult != null) {
+            return mostFrequentResult.getImageBitmap();
+        }
+
+        return null;
+    }
+
+    public static String getMostFrequentDiseaseHistory8() {
+        List<SavedResult> history8List = getHistory8List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history8List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        return mostFrequentDisease;
     }
 }

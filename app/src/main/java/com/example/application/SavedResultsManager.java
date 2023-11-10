@@ -290,8 +290,557 @@ public class SavedResultsManager<result> {
 
 
 
-    public static String getSavedResultsAsString() {
-        Gson gson = new Gson();
-        return gson.toJson(savedResultsList);
+
+
+    public static String getMostFrequentDiseaseHistory2() {
+        List<SavedResult> history2List = getHistory2List();
+
+        // Mag-create ng isang mapa para i-track ang dami ng bawat sakit
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        // I-loop ang history2List at i-count ang bawat sakit
+        for (SavedResult result : history2List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        // Hanapin ang pinakamadalas na sakit sa history2List
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        return mostFrequentDisease;
     }
+
+    public static Bitmap getImageForMostFrequentDiseaseHistory2() {
+        List<SavedResult> history2List = getHistory2List();
+
+        // Mag-create ng isang mapa para i-track ang dami ng bawat sakit
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        // I-loop ang history2List at i-count ang bawat sakit
+        for (SavedResult result : history2List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        // Hanapin ang pinakamadalas na sakit sa history2List
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        // Hanapin ang result para sa pinakamadalas na sakit sa history2List
+        SavedResult mostFrequentResult = null;
+
+        for (SavedResult result : history2List) {
+            if (result.getDiseaseName().equals(mostFrequentDisease)) {
+                mostFrequentResult = result;
+                break;
+            }
+        }
+
+        // Kung may natagpuang result, kunin ang image bitmap
+        if (mostFrequentResult != null) {
+            return mostFrequentResult.getImageBitmap();
+        }
+
+        return null;
+    }
+
+
+
+
+
+    public static Bitmap getImageForMostFrequentDiseaseHistory3() {
+        List<SavedResult> history3List = getHistory3List();
+
+        // Mag-create ng isang mapa para i-track ang dami ng bawat sakit
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        // I-loop ang history2List at i-count ang bawat sakit
+        for (SavedResult result : history3List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        // Hanapin ang pinakamadalas na sakit sa history2List
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        // Hanapin ang result para sa pinakamadalas na sakit sa history2List
+        SavedResult mostFrequentResult = null;
+
+        for (SavedResult result : history3List) {
+            if (result.getDiseaseName().equals(mostFrequentDisease)) {
+                mostFrequentResult = result;
+                break;
+            }
+        }
+
+        // Kung may natagpuang result, kunin ang image bitmap
+        if (mostFrequentResult != null) {
+            return mostFrequentResult.getImageBitmap();
+        }
+
+        return null;
+    }
+
+    public static String getMostFrequentDiseaseHistory3() {
+        List<SavedResult> history3List = getHistory3List();
+
+
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+
+        for (SavedResult result : history3List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        return mostFrequentDisease;
+    }
+
+    public static Bitmap getImageForMostFrequentDiseaseHistory4() {
+        List<SavedResult> history4List = getHistory4List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history4List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        SavedResult mostFrequentResult = null;
+
+        for (SavedResult result : history4List) {
+            if (result.getDiseaseName().equals(mostFrequentDisease)) {
+                mostFrequentResult = result;
+                break;
+            }
+        }
+
+        if (mostFrequentResult != null) {
+            return mostFrequentResult.getImageBitmap();
+        }
+
+        return null;
+    }
+
+    public static String getMostFrequentDiseaseHistory4() {
+        List<SavedResult> history4List = getHistory4List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history4List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        return mostFrequentDisease;
+    }
+
+
+    public static Bitmap getImageForMostFrequentDiseaseHistory5() {
+        List<SavedResult> history5List = getHistory5List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history5List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        SavedResult mostFrequentResult = null;
+
+        for (SavedResult result : history5List) {
+            if (result.getDiseaseName().equals(mostFrequentDisease)) {
+                mostFrequentResult = result;
+                break;
+            }
+        }
+
+        if (mostFrequentResult != null) {
+            return mostFrequentResult.getImageBitmap();
+        }
+
+        return null;
+    }
+
+    public static String getMostFrequentDiseaseHistory5() {
+        List<SavedResult> history5List = getHistory5List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history5List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        return mostFrequentDisease;
+    }
+
+
+    public static Bitmap getImageForMostFrequentDiseaseHistory7() {
+        List<SavedResult> history7List = getHistory7List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history7List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        SavedResult mostFrequentResult = null;
+
+        for (SavedResult result : history7List) {
+            if (result.getDiseaseName().equals(mostFrequentDisease)) {
+                mostFrequentResult = result;
+                break;
+            }
+        }
+
+        if (mostFrequentResult != null) {
+            return mostFrequentResult.getImageBitmap();
+        }
+
+        return null;
+    }
+
+    public static String getMostFrequentDiseaseHistory7() {
+        List<SavedResult> history7List = getHistory7List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history7List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        return mostFrequentDisease;
+    }
+
+
+
+    public static Bitmap getImageForMostFrequentDiseaseHistory8() {
+        List<SavedResult> history8List = getHistory8List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history8List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        SavedResult mostFrequentResult = null;
+
+        for (SavedResult result : history8List) {
+            if (result.getDiseaseName().equals(mostFrequentDisease)) {
+                mostFrequentResult = result;
+                break;
+            }
+        }
+
+        if (mostFrequentResult != null) {
+            return mostFrequentResult.getImageBitmap();
+        }
+
+        return null;
+    }
+
+    public static String getMostFrequentDiseaseHistory8() {
+        List<SavedResult> history8List = getHistory8List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history8List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        return mostFrequentDisease;
+    }
+
+
+    public static Bitmap getImageForMostFrequentDiseaseHistory9() {
+        List<SavedResult> history9List = getHistory9List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history9List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        SavedResult mostFrequentResult = null;
+
+        for (SavedResult result : history9List) {
+            if (result.getDiseaseName().equals(mostFrequentDisease)) {
+                mostFrequentResult = result;
+                break;
+            }
+        }
+
+        if (mostFrequentResult != null) {
+            return mostFrequentResult.getImageBitmap();
+        }
+
+        return null;
+    }
+
+    public static String getMostFrequentDiseaseHistory9() {
+        List<SavedResult> history9List = getHistory9List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history9List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        return mostFrequentDisease;
+    }
+
+
+    public static Bitmap getImageForMostFrequentDiseaseHistory10() {
+        List<SavedResult> history10List = getHistory10List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history10List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        SavedResult mostFrequentResult = null;
+
+        for (SavedResult result : history10List) {
+            if (result.getDiseaseName().equals(mostFrequentDisease)) {
+                mostFrequentResult = result;
+                break;
+            }
+        }
+
+        if (mostFrequentResult != null) {
+            return mostFrequentResult.getImageBitmap();
+        }
+
+        return null;
+    }
+
+    public static String getMostFrequentDiseaseHistory10() {
+        List<SavedResult> history10List = getHistory10List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history10List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        return mostFrequentDisease;
+    }
+
+
+    public static Bitmap getImageForMostFrequentDiseaseHistory6() {
+        List<SavedResult> history6List = getHistory6List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history6List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        SavedResult mostFrequentResult = null;
+
+        for (SavedResult result : history6List) {
+            if (result.getDiseaseName().equals(mostFrequentDisease)) {
+                mostFrequentResult = result;
+                break;
+            }
+        }
+
+        if (mostFrequentResult != null) {
+            return mostFrequentResult.getImageBitmap();
+        }
+
+        return null;
+    }
+
+    public static String getMostFrequentDiseaseHistory6() {
+        List<SavedResult> history6List = getHistory6List();
+        Map<String, Integer> diseaseCountMap = new HashMap<>();
+
+        for (SavedResult result : history6List) {
+            String diseaseName = result.getDiseaseName();
+            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
+        }
+
+        String mostFrequentDisease = null;
+        int maxFrequency = 0;
+
+        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
+            if (entry.getValue() > maxFrequency) {
+                maxFrequency = entry.getValue();
+                mostFrequentDisease = entry.getKey();
+            }
+        }
+
+        return mostFrequentDisease;
+    }
+
+
+
+
+
 }
+
+
+
+

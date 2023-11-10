@@ -75,7 +75,7 @@ public class History10 extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (isRecommendationClickable) { // Check if button is clickable
-                    Intent intent = new Intent(History10.this, RecommendationActivity.class);
+                    Intent intent = new Intent(History10.this, rec10.class);
                     intent.putExtra("diseaseName", mostFrequentAndSevereDisease);
                    startActivity(intent);
                 }

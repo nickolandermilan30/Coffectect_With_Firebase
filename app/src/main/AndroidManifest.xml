@@ -20,6 +20,30 @@
         android:theme="@style/Theme.Application"
         tools:targetApi="31">
         <activity
+            android:name=".rec10"
+            android:exported="false" />
+        <activity
+            android:name=".rec9"
+            android:exported="false" />
+        <activity
+            android:name=".rec8"
+            android:exported="false" />
+        <activity
+            android:name=".rec7"
+            android:exported="false" />
+        <activity
+            android:name=".rec6"
+            android:exported="false" />
+        <activity
+            android:name=".rec5"
+            android:exported="false" />
+        <activity
+            android:name=".rec4"
+            android:exported="false" />
+        <activity
+            android:name=".rec3"
+            android:exported="false" />
+        <activity
             android:name=".rec2"
             android:exported="false" />
         <activity
