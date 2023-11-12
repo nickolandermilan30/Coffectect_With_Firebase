@@ -44,7 +44,7 @@ public class History9 extends AppCompatActivity {
         Button clearResultsButton = findViewById(R.id.clearResultsButton);
 
         // Retrieve saved results from SavedResultsManager for History3
-        List<SavedResult> savedResults = SavedResultsManager.getHistory6List();  // Ito ay maaaring pagbabago depende sa iyong implementation
+        List<SavedResult> savedResults = SavedResultsManager.getHistory9List();  // Ito ay maaaring pagbabago depende sa iyong implementation
 
         // Update the saved results count TextView
         updateSavedResultsCount(savedResults.size());
@@ -63,7 +63,7 @@ public class History9 extends AppCompatActivity {
         Button recommendationButton = findViewById(R.id.recommendationButton);
 
         // Check if there are at least 10 saved results to show the recommendation button
-        if (SavedResultsManager.getHistory6List().size() < 10) {  // Ito ay maaaring pagbabago depende sa iyong implementation
+        if (SavedResultsManager.getHistory9List().size() < 10) {  // Ito ay maaaring pagbabago depende sa iyong implementation
             recommendationButton.setVisibility(View.GONE); // Hide the recommendation button
         }
 
@@ -88,7 +88,7 @@ public class History9 extends AppCompatActivity {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         isRecommendationClickable = false;
-                        SavedResultsManager.clearHistory6Results();  // Ito ay maaaring pagbabago depende sa iyong implementation
+                        SavedResultsManager.clearHistory9Results();  // Ito ay maaaring pagbabago depende sa iyong implementation
 
                         // Refresh the RecyclerView
                         savedResultsList.clear();

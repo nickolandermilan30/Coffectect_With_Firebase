@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <uses-permission android:name="android.permission.CAMERA" />
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 
     <uses-feature android:name="android.hardware.camera" />
     <uses-feature android:name="android.hardware.camera.autofocus" />
@@ -20,6 +20,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Application"
         tools:targetApi="31">
+        <activity
+            android:name=".reco1"
+            android:exported="false" />
         <activity
             android:name=".rec10"
             android:exported="false" />
