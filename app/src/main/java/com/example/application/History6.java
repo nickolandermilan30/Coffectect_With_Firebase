@@ -41,7 +41,6 @@ public class History6 extends AppCompatActivity {
         savedResultsCountTextView = findViewById(R.id.savedResultsCount);
 
 
-
         recommendationButton = findViewById(R.id.recommendationButton);
         Button clearResultsButton = findViewById(R.id.clearResultsButton);
 

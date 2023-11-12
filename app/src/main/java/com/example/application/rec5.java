@@ -43,7 +43,7 @@ public class rec5 extends AppCompatActivity {
 
             diseaseTextView.setText("Disease: " + diseaseName);
 
-            Bitmap mostFrequentImage = SavedResultsManager.getImageForMostFrequentDisease();
+            Bitmap mostFrequentImage = SavedResultsManager. getImageForMostFrequentDiseaseHistory5();
             if (mostFrequentImage != null) {
                 mostFrequentImageView.setImageBitmap(mostFrequentImage);
             }
