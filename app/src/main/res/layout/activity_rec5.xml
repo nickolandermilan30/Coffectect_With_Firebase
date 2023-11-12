@@ -7,8 +7,6 @@
     tools:context=".rec5">
 
 
-
-
     <ImageView
         android:id="@+id/mostFrequentImageView"
         android:layout_width="585dp"
@@ -58,8 +56,6 @@
         app:layout_constraintEnd_toStartOf="@+id/imageView5"
         app:layout_constraintHorizontal_bias="0.945"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.964"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -68,7 +64,7 @@
         android:layout_height="68dp"
         android:layout_gravity="left"
         android:fontFamily="@font/hammersmith_one"
-        android:gravity="left"
+        android:gravity="center"
         android:text="Most Disease"
         android:textColor="@color/black"
         android:textSize="20dp"
@@ -91,57 +87,35 @@
         tools:layout_editor_absoluteX="15dp" />
 
 
-    <ScrollView
-        android:id="@+id/scrollView3"
-        android:layout_width="352dp"
-        android:layout_height="237dp"
-        android:layout_weight="1"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/mostFrequentTextView"
-        app:layout_constraintVertical_bias="0.467">
-
-        <TextView
-            android:id="@+id/recommendationTextView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/nunito_semi_bold"
-            android:padding="16dp"
-            android:text="Recommendation"
-            android:textColor="@color/black"
-            android:textSize="18sp" />
-    </ScrollView>
-
     <Button
         android:id="@+id/okButton"
         android:layout_width="130dp"
-        android:layout_height="50dp"
+        android:layout_height="55dp"
         android:layout_gravity="center"
+        android:layout_marginTop="48dp"
         android:backgroundTint="@color/green"
-        android:text="OK"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:text="Add to Chart"
+        app:layout_constraintBottom_toTopOf="@+id/leafRecommendationButton"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.174"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mostFrequentImageView"
-        app:layout_constraintVertical_bias="0.952"
+        app:layout_constraintTop_toBottomOf="@+id/mostFrequentTextView"
+        app:layout_constraintVertical_bias="0.285"
         tools:ignore="MissingConstraints" />
 
     <Button
-        android:id="@+id/saveMostFrequentButton"
-        android:layout_width="130dp"
-        android:layout_height="50dp"
+        android:id="@+id/leafRecommendationButton"
+        android:layout_width="158dp"
+        android:layout_height="55dp"
         android:layout_gravity="center"
         android:backgroundTint="@color/green"
-        android:text="Save Most Frequent Disease"
+        android:text="Recomendation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.632"
-        app:layout_constraintStart_toEndOf="@+id/okButton"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/mostFrequentImageView"
-        app:layout_constraintVertical_bias="0.951"
+        app:layout_constraintVertical_bias="0.69"
         tools:ignore="MissingConstraints" />
 
     <TextView
@@ -181,5 +155,3 @@
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-
-

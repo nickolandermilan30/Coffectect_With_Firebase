@@ -21,6 +21,33 @@
         android:theme="@style/Theme.Application"
         tools:targetApi="31">
         <activity
+            android:name=".reco10"
+            android:exported="false" />
+        <activity
+            android:name=".reco9"
+            android:exported="false" />
+        <activity
+            android:name=".reco8"
+            android:exported="false" />
+        <activity
+            android:name=".reco7"
+            android:exported="false" />
+        <activity
+            android:name=".reco6"
+            android:exported="false" />
+        <activity
+            android:name=".reco5"
+            android:exported="false" />
+        <activity
+            android:name=".reco4"
+            android:exported="false" />
+        <activity
+            android:name=".reco3"
+            android:exported="false" />
+        <activity
+            android:name=".reco2"
+            android:exported="false" />
+        <activity
             android:name=".reco1"
             android:exported="false" />
         <activity

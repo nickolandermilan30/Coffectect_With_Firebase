@@ -211,12 +211,12 @@ public class SavedResultsManager<result> {
         return history7List.size();
     }
     public static void addSavedResultToHistory7(SavedResult result) {
-        if (history6List.size() < 10) {
-            history6List.add(result);
+        if (history7List.size() < 10) {
+            history7List.add(result);
         }
     }
     public static void clearHistory7Results() {
-        history6List.clear();
+        history7List.clear();
     }
     public static List<SavedResult> getHistory7List() {
         return history7List;

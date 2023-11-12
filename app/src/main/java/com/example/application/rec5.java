@@ -1,10 +1,5 @@
 package com.example.application;
 
-import static com.example.application.SavedResultsManager.getHistory6List;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -16,179 +11,68 @@ import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 public class rec5 extends AppCompatActivity {
 
+    // Map to store recommendations based on disease and severity
     private Map<String, Map<Integer, String>> recommendationsMap = new HashMap<>();
-    private RatingBar ratingBar;
-    private TextView ratingText;
+    private String diseaseName; // Declare diseaseName at a higher scope
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rec5);
 
+        // Hide the action bar (app bar or title bar)
         if (getSupportActionBar() != null) {
             getSupportActionBar().hide();
         }
 
-        initializeRecommendations();
 
         TextView diseaseTextView = findViewById(R.id.diseaseTextView);
-        TextView severityTextView = findViewById(R.id.severityTextView);
-        TextView recommendationTextView = findViewById(R.id.recommendationTextView);
         ImageView mostFrequentImageView = findViewById(R.id.mostFrequentImageView);
 
         Intent intent = getIntent();
         if (intent != null) {
-            String diseaseName = intent.getStringExtra("diseaseName");
-            int severityLevel = intent.getIntExtra("severityLevel", 0);
+            diseaseName = SavedResultsManager. getMostFrequentDiseaseHistory5();
 
-            String recommendation = getRecommendation(diseaseName, severityLevel);
             diseaseTextView.setText("Disease: " + diseaseName);
-            severityTextView.setText("Severity: " + severityLevel);
-            recommendationTextView.setText(recommendation);
 
-            Bitmap mostFrequentImage = SavedResultsManager.getImageForMostFrequentDiseaseHistory5();
+            Bitmap mostFrequentImage = SavedResultsManager.getImageForMostFrequentDisease();
             if (mostFrequentImage != null) {
                 mostFrequentImageView.setImageBitmap(mostFrequentImage);
             }
         }
 
-        ImageButton legButton = findViewById(R.id.leg);
-        legButton.setOnClickListener(new View.OnClickListener() {
+        Button reco5 =findViewById(R.id.leafRecommendationButton);
+        Button okButton = findViewById(R.id.okButton);
+
+        reco5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                showCustomAlertDialog();
+                Intent intent = new Intent(rec5.this, reco5.class);
+                // Pass the most frequent disease name to reco1 activity
+                intent.putExtra("diseaseName", diseaseName);
+                startActivity(intent);
             }
         });
 
-        Button okButton = findViewById(R.id.okButton);
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                finish();
+                Intent intent = new Intent(rec5.this, Calendar.class);
+                intent.putExtra("diseaseName", diseaseName);
+                startActivity(intent);
             }
         });
 
         TextView mostFrequentTextView = findViewById(R.id.mostFrequentTextView);
-        String mostFrequentHistory5Disease = SavedResultsManager.getMostFrequentDiseaseHistory5();
-        if (mostFrequentHistory5Disease != null) {
-            mostFrequentTextView.setText("Most Frequent Disease in History5: " + mostFrequentHistory5Disease);
+        if (diseaseName != null) {
+            mostFrequentTextView.setText("Most Frequent Disease: " + diseaseName);
         }
-    }
-
-    private void showCustomAlertDialog() {
-        View dialogView = LayoutInflater.from(this).inflate(R.layout.custom_alert_layout, null);
-        ImageView imageView = dialogView.findViewById(R.id.customAlertDialogImageView);
-        TextView textView = dialogView.findViewById(R.id.customAlertDialogTextView);
-        textView.setText("This is The meaning of 1,2,3 on severity");
-
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setView(dialogView);
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
-    }
-
-    private void initializeRecommendations() {
-        // Recommendations Map initialization...
-    }
-
-    private String getRecommendation(String diseaseName, int severityLevel) {
-        Map<Integer, String> severityRecommendations = recommendationsMap.get(diseaseName);
-        if (severityRecommendations != null) {
-            String recommendation = severityRecommendations.get(severityLevel);
-            if (recommendation != null) {
-                return recommendation;
-            }
-        }
-        return "No Recommendation Available";
-    }
-
-
-
-    public static Bitmap getImageForMostFrequentDiseaseHistory6() {
-        List<SavedResult> history6List = getHistory6List();
-        Map<String, Integer> diseaseCountMap = new HashMap<>();
-
-        for (SavedResult result : history6List) {
-            String diseaseName = result.getDiseaseName();
-            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
-        }
-
-        String mostFrequentDisease = null;
-        int maxFrequency = 0;
-
-        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
-            if (entry.getValue() > maxFrequency) {
-                maxFrequency = entry.getValue();
-                mostFrequentDisease = entry.getKey();
-            }
-        }
-
-        SavedResult mostFrequentResult = null;
-
-        for (SavedResult result : history6List) {
-            if (result.getDiseaseName().equals(mostFrequentDisease)) {
-                mostFrequentResult = result;
-                break;
-            }
-        }
-
-        if (mostFrequentResult != null) {
-            return mostFrequentResult.getImageBitmap();
-        }
-
-        return null;
-    }
-
-    public static String getMostFrequentDiseaseHistory6() {
-        List<SavedResult> history6List = getHistory6List();
-        Map<String, Integer> diseaseCountMap = new HashMap<>();
-
-        for (SavedResult result : history6List) {
-            String diseaseName = result.getDiseaseName();
-            diseaseCountMap.put(diseaseName, diseaseCountMap.getOrDefault(diseaseName, 0) + 1);
-        }
-
-        String mostFrequentDisease = null;
-        int maxFrequency = 0;
-
-        for (Map.Entry<String, Integer> entry : diseaseCountMap.entrySet()) {
-            if (entry.getValue() > maxFrequency) {
-                maxFrequency = entry.getValue();
-                mostFrequentDisease = entry.getKey();
-            }
-        }
-
-        return mostFrequentDisease;
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}
+    }}

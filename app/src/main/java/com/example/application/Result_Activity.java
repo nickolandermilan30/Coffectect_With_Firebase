@@ -114,6 +114,11 @@ public class Result_Activity extends AppCompatActivity {
                         // Redirect to another activity (Folders)
                         Intent intent = new Intent(Result_Activity.this, Folders.class);
                         startActivity(intent);
+// Check if `History` is full and add to the appropriate history list
+                        int maxSavedResults = 10;
+                        if (SavedResultsManager.getSavedResultsCount() < maxSavedResults) {
+                            SavedResultsManager.addSavedResult(savedResult);
+                        } else {
 
                         // Check if `History` is full and add to the appropriate history list
                         if (SavedResultsManager.getSavedResultsCount() < 10) {
@@ -136,6 +141,12 @@ public class Result_Activity extends AppCompatActivity {
                             SavedResultsManager.addSavedResultToHistory9(savedResult);
                         } else if (SavedResultsManager.getSavedResultsCountHistory10() < 10) {
                             SavedResultsManager.addSavedResultToHistory10(savedResult);
+                        } else {
+                            // Show dialog alert if the number of saved results in all histories reaches 10
+                            showMaxSavedResultsDialog();
+                            isSaving = false;
+                            return; // Do not proceed further
+                        }
                         }
 
                         // Save the image to Firebase Storage
@@ -146,6 +157,19 @@ public class Result_Activity extends AppCompatActivity {
                         isSaving = false;
                     }
                 }
+            }
+
+            private void showMaxSavedResultsDialog() {
+                AlertDialog.Builder builder = new AlertDialog.Builder(Result_Activity.this);
+                builder.setTitle("Maximum Saved Results Reached");
+                builder.setMessage("You have reached the maximum limit of saved results (10). You can clear some results to save new ones.");
+                builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                    }
+                });
+                builder.show();
             }
 
             private boolean isConnectedToInternet() {

@@ -85,7 +85,7 @@ public class History7 extends AppCompatActivity {
             public void onClick(View view) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(History7.this);
                 builder.setTitle("Clear Saved Results");
-                builder.setMessage("Are you sure you want to clear all saved results? This action cannot be undone.");
+                builder.setMessage("Are you sure you want to clear all saved results? This action cannot be undone. 7");
                 builder.setPositiveButton("Clear", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
